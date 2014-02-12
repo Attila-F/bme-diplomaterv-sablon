@@ -4,6 +4,11 @@
 \usepackage{indentfirst} % fejezetek első bekezdését is húzzuk be
 \usepackage{lmodern} %szépek lesznek tőle a betűk a pdfben
 \usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
 
 \usepackage[magyar]{babel}
 
@@ -20,7 +25,7 @@
   \pdfpagewidth\paperwidth \pdfpageheight\paperheight \pdfcompresslevel9
 \else \special{papersize=21cm,29.7cm} \fi
 
-\sloppy % inkább a térköz nőjön minthogy sorok lógjanak ki jobb szélen
+\sloppy % inkább a térköz nőljön minthogy sorok lógjanak ki jobb szélen
 
 \linespread{1.3} % Másfeles sorköz
 \frenchspacing   %Szimpla térköz mondatok között
@@ -28,13 +33,6 @@
 \begin{document}
 
 \include{coverpage} %fedlap
-
-\setcounter{tocdepth}{2} % tartalomjegyzék mélysége
-\tableofcontents % tartalomjegyzék
-
-\chapter*{Kivonat}
-
-A kivonat ide kerül.
 
 \selectlanguage{english}
 
@@ -44,9 +42,60 @@ Abstract goes here.
 
 \selectlanguage{magyar}
 
-\chapter{Bevezetés}
+\chapter*{Kivonat}
+
+A kivonat ide kerül.
+
+\setcounter{tocdepth}{2} % tartalomjegyzék mélysége
+\tableofcontents % tartalomjegyzék
+
+\include{introduction}
+\include{P1}
+\include{P2}
+\include{conclusion}
 
 % ide jön a dolgozat
+
+\begin{thebibliography}{9}
+
+\bibitem{trieste}
+  Brand, V:
+  \emph{Submersibles - Manned and Unmanned}\\
+  South Pacific Underwater Medicine Society Journal 7 (3), 1977\\
+  ISSN 0813-1988
+  
+ \bibitem{oceanography}
+  Robert H. Stewart:
+  \emph{Introduction To Physical Oceanography}
+  Department of Oceanography, Texas A \& M University
+
+\bibitem{talbot}
+  Arthur Newell Talbot:
+  \emph{The Railway Transition Spiral}\\
+  Engineering News Publishing Company, 1901
+
+\bibitem{kissb}
+  Istv\'an Koml\'osi and B\'alint Kiss:
+  \emph{Mobilis robotok auton\'om navig\'aci\'oja mozg\'o akad\'alyok elker\"ul\'es\'evel (Motion planning for multiple mobile robots using time-scaling)}\\
+  InTech Open Access Publisher, 2011. pp. 259-288.\\
+  ISBN: 978-953-307-842-7
+  
+\bibitem{aau}
+	Rasmus L. Christensen, Frederik Juul, Nick \O stergaard, Tudor Muresan, Attila Fodor:
+	\emph{Centralized State Estimation of Distributed Maritime Autonomous Surface Oceanographers}\\
+	Section for Control and Automation, Department of Electronic Systems, Aalborg University, Denmark, 2013.
+	
+\bibitem{uav}
+	
+	\emph{Operational Requirements Document for the Unmanned Aerial Vehicle Tactical Control System Version 5.0}
+	The Charles Stark Draper Laboratory Cambridge, MA 02139
+	
+\bibitem{res:FNPP}
+	Avichal Mehra, Zulema Garraffo, Hae-Cheol Kim, Ilya Rivin, Todd Spindler, Hendrik Tolman and Ming Ji
+	\emph{Ocean Plume and Tracer Modeling for the Fukushima Dai'ichi Event at NOAA}
+	NCEP/NWS/NOAA Camp Springs, U.S.A.
+
+\end{thebibliography}
 
 \end{document}
 
