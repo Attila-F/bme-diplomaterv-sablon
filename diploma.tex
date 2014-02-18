@@ -2,7 +2,8 @@
 %\documentclass[11pt,a4paper,twoside,openright]{report}  % Duplex
 
 %\PassOptionsToPackage{chapternumber=Huordinal}{magyar.ldf}
-\usepackage{t1enc}
+%\usepackage{t1enc}
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -43,14 +44,14 @@
 % (like the ToC, the References, and the Chapter pages)remain in plane style
 
 \pagestyle{plain}
-%\setlength{\parindent}{0pt} % áttekinthetőbb, angol nyelvű dokumentumokban jellemző
-%\setlength{\parskip}{8pt plus 3pt minus 3pt} % áttekinthetőbb, angol nyelvű dokumentumokban jellemző
-\setlength{\parindent}{12pt} % magyar nyelvű dokumentumokban jellemző
-\setlength{\parskip}{0pt}    % magyar nyelvű dokumentumokban jellemző
+\setlength{\parindent}{0pt} % áttekinthetőbb, angol nyelvű dokumentumokban jellemző
+\setlength{\parskip}{8pt plus 3pt minus 3pt} % áttekinthetőbb, angol nyelvű dokumentumokban jellemző
+%\setlength{\parindent}{12pt} % magyar nyelvű dokumentumokban jellemző
+%\setlength{\parskip}{0pt}    % magyar nyelvű dokumentumokban jellemző
 
 \marginsize{35mm}{25mm}{15mm}{15mm} % anysize package
 \setcounter{secnumdepth}{0}
-\sectionfont{\large\upshape\bfseries}
+\sectionfont{\huge\upshape\bfseries}
 \setcounter{secnumdepth}{0}
 \singlespacing
 \frenchspacing
