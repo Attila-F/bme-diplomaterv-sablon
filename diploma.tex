@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper,oneside]{report}             % Single-side
+\documentclass[11pt,a4paper,oneside]{article}             % Single-side
 %\documentclass[11pt,a4paper,twoside,openright]{report}  % Duplex
 
 %\PassOptionsToPackage{chapternumber=Huordinal}{magyar.ldf}
@@ -15,7 +15,7 @@
 %\usepackage{fancyhdr}
 \usepackage{lastpage}
 \usepackage{anysize}
-\usepackage[magyar]{babel}
+%\usepackage[magyar]{babel}
 \usepackage{sectsty}
 \usepackage{setspace}  % Ettol a tablazatok, abrak, labjegyzetek maradnak 1-es sorkozzel!
 \usepackage[hang]{caption}
@@ -51,7 +51,7 @@
 \marginsize{35mm}{25mm}{15mm}{15mm} % anysize package
 \setcounter{secnumdepth}{0}
 \sectionfont{\large\upshape\bfseries}
-\setcounter{secnumdepth}{2}
+\setcounter{secnumdepth}{0}
 \singlespacing
 \frenchspacing
 
@@ -157,7 +157,7 @@ aboveskip=10pt}
 %\listoftables\addcontentsline{toc}{chapter}{Táblázatok jegyzéke}
 
 \bibliography{bibl}
-\addcontentsline{toc}{chapter}{Bibliography}
+\addcontentsline{toc}{section}{Bibliography}
 \bibliographystyle{unsrt}
 
 \include{appendices}

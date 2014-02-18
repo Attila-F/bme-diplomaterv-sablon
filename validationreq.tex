@@ -1,0 +1,17 @@
+%\chapter*{Operational Requirements}\addcontentsline{toc}{chapter}{Operational Requirements}
+\section{Operational Requirements}
+
+In order to execute a rational oceanography task, a number of valid objectives must be set. These objectives are usually one or more of the following\cite{oceanography}:
+
+\begin{itemize}
+\item A set of geographical measurement locations, with or without time and measurement type conditions
+\item A certain area of interest
+\item Maximal action duration requirement
+\item Other
+\end{itemize}
+
+The task planning is usually carried out by the scientist group, but some auto-planning modes need to be supported. A typical task is the creation of a measurement-grid, with preset definition, in a certain geographical area. The High Level Controller (HLC) uses a Mission planning time algorithm, to support the auto-generation of the waypoints. This module is the "Waypoint planner", which outputs a list of coordinates that contains the measurement points.
+
+Once the ship reaches the current waypoint, it determines the next aim.
+
+A set of points defining a path can be specified for the ship, but it does not ensure that the created path is valid, therefore a second "Pathplanning" stage is required, which analyzes the generated set of locations and creates a path that is actually sailable by the ship.
