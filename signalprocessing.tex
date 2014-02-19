@@ -1,5 +1,30 @@
 \section{Signal processing}
 
+The GPS navigation providev very accurate position estimate, and provides the quality of reception to estimate the error. The GPS provides additional measurements, but these are only estimates based on the current a previous position data.
+
+Limitations of the GPS:
+\begin{itemize}
+\item Approximately 1 position update / sec
+\item Cold start - the accuracy of the position estimate increases slowly, but is measured
+\item No absolute attitude information - heading is unknown at start
+\end{itemize}
+
+The conclusion is simple: The GPS sensor must be complemented with another sensor capable of providing quick measurements about the relative changes of position and attitude, and possibly providing absolute heading informations.
+
+Limitations of the Optometric sensor matrix (RobonAUT):
+\begin{itemize}
+\item Limited absolute range
+\item Only position information is provided
+\item The measurement is a nonlinear function of d and $\delta$
+\end{itemize}
+
+The conclusion here is to try to estimate $\delta$ based on the sensor reading $x | x!=d$ and predict the changes of x and $\delta$ if no measurements are available. The presence of an odometric sensor is assumed.
+
+The solution is to use sensor-fusion to produce an estimate based on the available sensor inputs, using Kalman Filtering, or Extended Kalman Filtering.
+As the nonlinear system transition functions of the systems are known, the formulation of the Extended Kalman Filter is possible using the Jacobi matrices of the system.
+
+Using Kalman filtering an optimas output estimate can be produced (assuming the correct covariance matrices have been determined), and the required system states can be estimated (if the system is observable).
+
 \subsection{Inner and outer sensors}
 
 \subsection{Sensorfusion}
