@@ -3,7 +3,45 @@
 
 V\& V has become a very popular concept recently, but has always been a vital process in the development of mission-critical systems. Losing or sinking the prototype due to faulty design or construction would have a devastating effect on my thesis, therefore I treated the system as mission-critical, trying to ensure very high reliability.
 
-\subsection{General requirements of autonomus vehicles}
+\subsection{Basic requirements of mobile robots}
+
+Due to the fact that mobile robots are operating in a constantly changing environment, they must meet very strict requirements. Therefore the most basic operational requirements can be summarized: \cite{navreq}
+\begin{itemize}
+
+\item Convergence
+\begin{itemize}
+	\item The robot must reach the target in finite time, or
+	\item If the robot is unable to reach the target, it must recognize this in finite time
+\end{itemize}
+
+\item Learning
+\begin{itemize}
+	\item The robot must learn its environment during the navigation
+	\item Creation of maps, obstacles and Feasible Free Space
+\end{itemize}
+
+\item Monotonity
+\begin{itemize}
+	\item The shortest route to the target must not increase during movement and learning
+\end{itemize}
+
+\item Algorithm
+\begin{itemize}
+	\item The navigation algorithm must not limit the complexity of the environment
+	\item The environmental dependency of the algorithm must be minimal
+\end{itemize}
+
+\end{itemize}
+
+\subsection{Software requirements of the system}
+
+To ensure a solid and coherent set of software requirements, the following highlights have been imported from an early Operational Requirements document of the United States UAV Tactical Control System project \cite{uav}. Some of the used terminology originates from this document as well.
+
+\begin{itemize}
+
+\item Scaled and Modular Design
+
+\end{itemize}
 
 \subsection{Requirements of survey ships}
 

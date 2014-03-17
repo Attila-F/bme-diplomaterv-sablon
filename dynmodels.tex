@@ -1,12 +1,19 @@
 \section{Dynamic models of ships}
 
-Simple ship dynamic models can be formulated quickly by defining and analyzing the most common propulsion methods. However, these are only approximations of the system, and contain none of the complex and powerful effects of hydrodynamics.
+Simple ship dynamic models can be formulated quickly by defining and analyzing the most common propulsion methods. However, these are only vague approximations of the system, and contain few elements of the complex and powerful hydrodynamics.
 
 First the simple ship models are introduced, then an attempt is made to more accurately describe the dynamical system of a ship.
 
-\subsection{Twin-screw ship}
+\subsection{Differential drive}
 
-Using the engines positioned in a lateral offset to the centerline of the body, the ship can create a torque and propelling force affecting the body. If the engines are assumed to be infinitely strong, the torque and force are independent.
+The differential drive system is very common among simple mobile robotic systems. The movement is based on two separately driven wheels placed on either side of the robot body. It can thus change its direction by varying the relative rate of rotation of its wheels, therefore does not require an additional steering mechanism. A twin-screw ship has a somewhat similar layout. Using the engines positioned in a lateral offset to the centerline of the body, the ship can create a torque and propelling force affecting the body.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{pics/kadtronixframe}
+	\caption{Differential drive robot frame \\ http://www.kadtronix.com/}
+	\label{fig:kadtronixframe}
+\end{figure}
 
 This type of ship can be modeled as a 2-DOF mobile robot (frame fixed to the body of the ship).
 
@@ -67,17 +74,32 @@ The resulting dynamical system can be formulated:
 
 The hydro- and aerodynamic effects have a great impact on the dynamics of a ship. A perfect prediction is hardly possible, but some considerations can be employed in order to predict the behaviour of a real ship.
 The ever-changing draught of the ship, the effects of the viscous medium it’s located in, nonlinear hydrodynamic effects on the turbines and the body and much else causes this severe complexity of the dynamics of a ship. Including the effects of the wind on the body of the ship or the rigg, the resulting system is more like a mess than a clear representation.
-However, it’s important to partially unravel these myseries in order to formulate an effective control system.
+However, it’s important to partially unravel these mysteries in order to formulate an effective control system.
 
 From now on, however, in order to evaluate the possible control system methods 
 
-\subsection{Hydrodynamic effects}
+\subsection{Environmental model}
 
-\subsection{Wave model}
+In order to estimate the behavior of an object in natural environment, the ambient effects must be estimated first. The two major environmental factors are the effects of the sea and wind. They generate periodic loads that stirs and slowly wears down objects they contact width. An ocean surface is almost never still, as waves carry the memory of distant and past storms for a long way. However, the ever-changing and chaotic surface of the sea is composed of regular waves, each having its own frequency, direction and amplitude.
+
+A simple, but adequately complex irregular wave model\cite[p.~14]{shipsim} can be derived from the basic hydrodynamic principles using superposition of regular waves\cite[p.~19]{hydromechanics}.
+
+\begin{align}
+		\zeta (x, y, t) = T + H_s * \sum_{i=1}^{10} (cos(k .* (x .* sin(\chi) + y * cos(\chi)) + \Omega * \omega{_i} * t + \Phi));
+\end{align}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{fig/wavemodel}
+	\caption{Simulation result of the irregular wave model}
+	\label{fig:wavemodel}
+\end{figure}
+
+\subsection{Behavior of floating objects in water}
 
 \subsection{Building simulation environment}
 
-In order to test the generated path and eliminate some hazards of potential design errors or malfunctions, a seamless simulator is required that simulates the behaviors of the ship. \\
+To test the simulation environment a basic visualization
 
 \begin{tcolorbox}[colback=cyan!5,colframe=cyan!40!black,title=Code: Simulator.py \\ https://www.dropbox.com/s/agron9anslev6xw/Simulator.py]
 \begin{minipage}{0,6\textwidth}
@@ -88,24 +110,5 @@ According to the guidelines of the seamless simulator, this part of the system h
 \includegraphics[width=0.8\textwidth]{img/simulatorcode}
 \end{minipage}
 \end{tcolorbox}
-
-\subsection{Requirements of the simulator}
-
-The simulator developed for the project must meet the following conditions, otherwise the simulation might return false results, misguiding the whole development process.
-\begin{itemize}
-	\item The software controlling the simulated system must be unaware of the simulation
-	\item The control software must be completely independent of the simulator, its variables and its functions
-	\item The control software can communicate only through the same channel, as it would during normal operation
-	\item Any parameters and states that are not known, only measured (e.g.: measured position != actual position) must be stored in the simulator, and must not be accessed directly from the control software
-\end{itemize}
-
-To fulfill the requirements above, the following simulator has been implemented:
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{img/simulator}
-	\caption{System simulator}
-	\label{fig:simulator}
-\end{figure}
 
 \subsection{Uncontrolled system simulation results}

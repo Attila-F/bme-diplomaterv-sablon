@@ -1,21 +1,23 @@
 %\chapter*{Introduction}\addcontentsline{toc}{chapter}{Introduction}
 \section{Introduction}
 
-Seaborne measurements are often expensive and time consuming, though they can have a large impact on the area, where the data have been obtained. In 2011 the naval safe zone around the Fukusima accident was laid down based only on estimates of the radiation contamination\cite{FNPP}, because low amount of measurement data was available due to high measurement costs and risks. Another notable example are the coastal waters of Greenland, because are very poorly mapped up to present day\cite{2009AGUFMOS21A1152W}. Ships have to sail in a roundabout way around the island, because the risk of wrecking in unknown fjordic area is very high. This is a huge waste of time and natural resources annually.
+Seaborne monitoring and measurements are often expensive and time consuming, though they can have a large impact on the area, where the data have been obtained. In 2011 the naval safe zone around the Fukusima accident was laid down based only on estimates of the radiation contamination\cite{FNPP}, because low amount of measurement data was available due to high measurement costs and risks. Another notable example of oceanography is the area of Greenland, because the coastal waters are very poorly mapped up to present day\cite{2009AGUFMOS21A1152W}. Ships have to sail in a roundabout way around the island, because the risk of wrecking in unknown littoral area is very high. This is a huge waste of time and natural resources annually, but complete bathymetric survey of the danger zone is impossible due to the shortages of funds and manpower.
 
 \subsection*{Oceanography and Bathymetry}
 
-Not many people come across these expressions often. Oceanography can be summarized as a branch of Earth science that studies the ocean. It includes a wide range of topics, like the study of marine ecosystem, ocean currents, plate tectonics and the geology of the sea floor. Bathymetry is the study of underwater depth of lake or ocean floors. The advancing technology allows even more possibilities, like the aforementioned radiological measurements, or general monitoring of the seas.
+Not many people come across these expressions often. Oceanography can be summarized as a branch of Earth science that studies the ocean. It includes a wide range of topics, like the study of marine ecosystem, ocean currents, plate tectonics and the geology of the sea floor. Bathymetry is the study of underwater depth of lake or ocean floors. The advancing technology allows even more possibilities, like the aforementioned radiological measurements, or general monitoring of the seas. These areas are not the only possible application, but they are relatively straightforward and general for easy demonstration.
 
 \subsection*{Advantages of autonomous vessels}
 
-Oceanographic measurements today are carried out by large crewed ships, but in many cases they could be replaced by a number of smaller crafts, in order to reduce surveying time and cost and increase the available manpower in other tasks. These vessels could have the ability to sail previously unsurveyable areas as well, thanks to the shallower draught and smaller size.
+Oceanographic measurements today are carried out by large crewed ships, but in many cases they could be replaced by a number of smaller crafts, in order to reduce surveying time and cost and increase the available manpower in other tasks. These vessels have the ability to sail previously unsurveyable areas as well, thanks to the shallower draught and smaller size. Although the number of Autonomous Underwater Vehicles (AUV) are rapidly increasing\cite{AUV_growth}, the the Unmanned Surface Vehicles (USV) are still used mostly for military and academic purposes\cite{USV_applications}.
 
 \subsection*{Limitations}
 
-The most notable limitation of the current mobile robotic technologies are their small size itself. It means the relatively small range based on their smaller power capabilities, and narrow field of application.
+The most notable limitation of the current mobile robotic technologies are their small size itself. This results in relatively small range based on their smaller power capabilities, and narrow field of application. Conventional electric powered boats can operate reliably only in the littoral or riverine zones.
 
-The aim of this project is to develop an autonomous surface vehicle, which is capable of conducting multiple seaborne measurements. To execute an oceanography mission, the ship must be capable of autonomus navigation based on Global Positioning System (GPS) and an Internal Measurement Unit (IMU), to further enhance the precision in hazardous environment.
+\subsection*{Scope of duties}
+
+The goal of this project is to develop an autonomous surface vehicle, which is capable of conducting multiple seaborne measurements. In order to execute an oceanography mission, the ship must be capable of autonomous navigation based on Global Positioning System (GPS) and an Internal Measurement Unit (IMU), to further enhance the precision in hazardous environment.
 
 \begin{figure}[H]
 	\centering
@@ -25,7 +27,7 @@ The aim of this project is to develop an autonomous surface vehicle, which is ca
 \end{figure}
 
 \subsection*{Development guidelines}
-In order to keep a sensible and extendable system, the control software of the ship follows the guidelines of the Model-Based Design approach. The system software can be divided to two different kind of modules, one that is dependent, and one that is independent from the physical characteristics of the vessel. In order to maximize the extendability of the system, the fix (independent) modules must be completely general, but as thorough as possible, so as to keep the complexity of the changeable (dependent) software of the robot minimal.
+To keep a sensible and extendable system, the control software of the ship follows the guidelines of the Model-Based Design approach. The system software can be divided to two different modules, one that is dependent, and one that is independent from the physical characteristics of the vessel. In order to maximize the extendability of the system, the fix (independent) modules must be completely general, but as thorough as possible, so as to keep the complexity of the changeable (dependent) software of the robot minimal.
 \begin{wrapfigure}{r}{0.48\textwidth}
   \begin{center}
     \includegraphics[width=0.5\textwidth]{img/trieste}
@@ -39,7 +41,7 @@ the high level controller must be parametrized, based on the low level and hardw
 
 The point of these guidelines is to create a system of components with major reusability. Ideally a general Cross-platform High Level Controller controls different kind of vessels, through a standard interface. When changing to an arbitrary different vehicle, only the Low Level Controller must be replaced, which stores the characteristics of the vessel and implements the actuator control.
 
-\section*{Operation models}
+\subsection*{Operation models}
 
  A typical oceanography application starts on the shore. A science team analyzes the currently available data, then marks the area of measurements on the map. The  map data is transformed to a measurement path by the scientists or by the automatic waypoint planner of the ship. The autonomous surface vehicle is then outfitted with the right sensors for the task, and a manned ship transports it close to its destination. The crew can set the research vessel to manual, automatic or fully autonomous mode.
 
