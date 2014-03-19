@@ -1,17 +1,13 @@
 \section{Control system design}
 
-The path following control problem can be simplified to a course control problem, if:
 
-\begin{itemize}
-
-	\item The waypoints are adequately close to each other, or the path is populated with subwaypoints placed adequately close to each other
-	\item The waypoints are marked as visited, if the ship approaches them to a certain nonzero distance
-
-\end{itemize}
-
-Relying on the conditions above in not always possible, therefore the controller has been extended with position-control. If the feedback of the position error is zero, the resulting controller is identical to the simple heading controller.
+The path following control problem can be simplified to a course control problem, if the prescribed path is populated by waypoints adequately close to each other. Each waypoint is marked as visited it to ship approaches them to a certain none zero distance. Relying on these above is not always possible, therefore the controller has been extended with position-control.
 
 \subsection{The combined control problem}
+
+The path following problem can be traced back to an inverted pendulum system, which is a typical problem of controlling and unstable equilibrium. 
+
+[figure, way to trace back]
 
 The following control system has been developed for the Rudder ship type, in order to parallelize my efforts with the RobonAUT controller development, which is generally the same control problem, if the simplified system dynamics are used.
 
@@ -35,9 +31,9 @@ Using the linearized state transition matrices the transfer function of the syst
 	H(s) = C*(sI - A)^{-1}B + D
 \end{align}
 
-The resulting system is a 2nd order integrator, which isn’t a surprise, if we consider the linearized output d based on the input $\Phi$
+The resulting system is a 2nd order integrator, which isn’t a surprise, if we consider the linearized output d based on the input $\Phi$. Note though, That this transfer function is valid only in a very limited range of the state variables. Due to the nonlinear system dynamics, d is periodic, unless Phi is none zero and not infinitely small.
 
-Using this transfer function a PID steering controller can be designed to control the system.
+Using this transfer function a PID steering controller can be calculated to control the system.
 
 \begin{figure}[H]
 	\centering

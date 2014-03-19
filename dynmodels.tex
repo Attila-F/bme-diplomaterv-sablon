@@ -70,19 +70,19 @@ The resulting dynamical system can be formulated:
 	\\	\dot{\Theta} &= \frac{v_x * tan(\Phi)}{L}
 \end{align}
 
-\subsection{Complex ship dynamics}
+\subsection{Ship hydrodynamics}
 
 The hydro- and aerodynamic effects have a great impact on the dynamics of a ship. A perfect prediction is hardly possible, but some considerations can be employed in order to predict the behaviour of a real ship.
-The ever-changing draught of the ship, the effects of the viscous medium it’s located in, nonlinear hydrodynamic effects on the turbines and the body and much else causes this severe complexity of the dynamics of a ship. Including the effects of the wind on the body of the ship or the rigg, the resulting system is more like a mess than a clear representation.
-However, it’s important to partially unravel these mysteries in order to formulate an effective control system.
+The ever-changing draught of the ship, the effects of the viscous medium it’s located in, nonlinear hydrodynamic effects on the turbines and the body and much else causes the severe complexity of the system. Including the effects of the wind on the body of the ship or the rig, the resulting system is more like a mess than a clear representation.
+However, it’s important to at least partially unravel these mysteries in order to formulate an effective control system. In order to predict the behavior of the ship, the dynamics must be built from the bottom to the top, starting with the environmental model, then the wave model, the ocean/river current model, maneuvering model and finally through what they all interact, the inertia of the ship.
 
-From now on, however, in order to evaluate the possible control system methods 
+[figure]
 
 \subsection{Environmental model}
 
-In order to estimate the behavior of an object in natural environment, the ambient effects must be estimated first. The two major environmental factors are the effects of the sea and wind. They generate periodic loads that stirs and slowly wears down objects they contact width. An ocean surface is almost never still, as waves carry the memory of distant and past storms for a long way. However, the ever-changing and chaotic surface of the sea is composed of regular waves, each having its own frequency, direction and amplitude.
+In order to estimate the behavior of an object in natural environment, the ambient effects must be estimated first. The two major environmental factors are the effects of the sea and wind. They generate periodic loads that stirs and slowly wears down objects they come in contact width. An ocean surface is almost never still, as waves carry the memory of distant and past storms for a long way. However, the ever-changing and chaotic surface of the sea is composed of regular waves, each having its own frequency, direction and amplitude.
 
-A simple, but adequately complex irregular wave model\cite[p.~14]{shipsim} can be derived from the basic hydrodynamic principles using superposition of regular waves\cite[p.~19]{hydromechanics}.
+\paragraph{Wave model} A simple, but adequately complex irregular wave model\cite[p.~14]{shipsim} can be derived from the basic hydrodynamic principles using superposition of regular waves\cite[p.~19]{hydromechanics}.
 
 \begin{align}
 		\zeta (x, y, t) = T + H_s * \sum_{i=1}^{10} (cos(k .* (x .* sin(\chi) + y * cos(\chi)) + \Omega * \omega{_i} * t + \Phi));
@@ -94,6 +94,8 @@ A simple, but adequately complex irregular wave model\cite[p.~14]{shipsim} can b
 	\caption{Simulation result of the irregular wave model}
 	\label{fig:wavemodel}
 \end{figure}
+
+\paragraph{Wind model}
 
 \subsection{Behavior of floating objects in water}
 
