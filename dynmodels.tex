@@ -78,6 +78,20 @@ However, it’s important to at least partially unravel these mysteries in order
 
 [figure]
 
+\subsection{Building simulation environment}
+
+Based on a survey completed in the Brazilian and United States Navy the importance of various aspects of the simulation can be determined\cite[p.~6]{shipsim}. The result of the analysis show that the most essential areas are the acceleration, deceleration and turning rates of the ship. According to the respondents the simulation of the possible visibility issues are also important, and the environmental effects also scored high on the priority list. The results indicate that that the distribution and the wake of ship is less significant in a virtual environment.
+
+\begin{tcolorbox}[colback=cyan!5,colframe=cyan!40!black,title=Code: Simulator.py \\ https://www.dropbox.com/s/agron9anslev6xw/Simulator.py]
+\begin{minipage}{0,6\textwidth}
+According to the guidelines of the seamless simulator, this part of the system has its own distinctive object. Everything related to the simulator and everything that is unknown during the mission is stored and handled here.
+\end{minipage}
+\begin{minipage}{0,35\textwidth}
+\raggedleft
+\includegraphics[width=0.8\textwidth]{img/simulatorcode}
+\end{minipage}
+\end{tcolorbox}
+
 \subsection{Environmental model}
 
 In order to estimate the behavior of an object in natural environment, the ambient effects must be estimated first. The two major environmental factors are the effects of the sea and wind. They generate periodic loads that stirs and slowly wears down objects they come in contact width. An ocean surface is almost never still, as waves carry the memory of distant and past storms for a long way. However, the ever-changing and chaotic surface of the sea is composed of regular waves, each having its own frequency, direction and amplitude.
@@ -97,20 +111,6 @@ In order to estimate the behavior of an object in natural environment, the ambie
 
 \paragraph{Wind model}
 
-\subsection{Behavior of floating objects in water}
-
-\subsection{Building simulation environment}
-
-To test the simulation environment a basic visualization
-
-\begin{tcolorbox}[colback=cyan!5,colframe=cyan!40!black,title=Code: Simulator.py \\ https://www.dropbox.com/s/agron9anslev6xw/Simulator.py]
-\begin{minipage}{0,6\textwidth}
-According to the guidelines of the seamless simulator, this part of the system has its own distinctive object. Everything related to the simulator and everything that is unknown during the mission is stored and handled here.
-\end{minipage}
-\begin{minipage}{0,35\textwidth}
-\raggedleft
-\includegraphics[width=0.8\textwidth]{img/simulatorcode}
-\end{minipage}
-\end{tcolorbox}
+\subsection{Maneuvering model}
 
 \subsection{Uncontrolled system simulation results}
