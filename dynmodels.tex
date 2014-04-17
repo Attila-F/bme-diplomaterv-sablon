@@ -1,3 +1,64 @@
+\section{Environmental model}
+
+In order to estimate the behavior of an object in natural environment, the ambient effects must be estimated first. The two major environmental factors are the effects of the sea and wind. They generate periodic loads that stirs and slowly wears down objects they come in contact width. An ocean surface is almost never still, as waves carry the memory of distant and past storms for a long way. However, the ever-changing and chaotic surface of the sea is composed of regular waves, each having its own frequency, direction and amplitude.
+
+\subsection{Wave model} A simple, but adequately complex irregular wave model\cite[p.~14]{shipsim} can be derived from the basic hydrodynamic principles using superposition of regular waves\cite[p.~19]{hydromechanics}.
+
+\begin{align}
+		\zeta (x, y, t) = T + H_s * \sum_{i=1}^{10} (cos(k .* (x .* sin(\chi) + y * cos(\chi)) + \Omega * \omega{_i} * t + \Phi))
+\end{align}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{fig/wavemodel}
+	\caption{Simulation result of the irregular wave model}
+	\label{fig:wavemodel}
+\end{figure}
+
+\subsection{Wind model}
+
+TODO: Beaufort-scale, wind-waves
+
+\subsection{Behaviour of objects in waves}
+
+The movement of ships in water is the result of a number of external forces, like gravity, buoyancy, waves, wind, etc. and the damping effect of the inertia of the ship.
+
+Behaviour in water can be separated to six different motions.
+
+3 translational:
+
+\begin{itemize}
+
+	\item \emph{Surge} in the longitudinal \textbf{x}-direction, positive forwards
+	\item \emph{Sway} in lateral \textbf{y}-direction, positive to port (left) side
+	\item \emph{Heave} in the vertival \textbf{z}-direction, positive upwards
+
+\end{itemize}
+
+and 3 rotational:
+
+\begin{itemize}
+
+	\item \emph{Roll} around the longitudinal \textbf{x}-axis, positive right turning
+	\item \emph{Pitch} around lateral \textbf{y}-axis, positive right turning
+	\item \emph{Yaw} around the vertival \textbf{z}-axis, positive right turning
+
+\end{itemize}
+
+These components are built up of multiple sub-components possessing small amplitudes and different frequencies.
+
+[img from ShipHydromechanics 38.pg perhaps?]
+
+In hydrodynamics, the geometrical extent of the floating body must be considered. A wave traveling beneath the ship acts as a force distributed in space and time, first pushing the bow, then the stern of the ship upwards. However, exploiting the rigidity of the hull, the effects can be simplified to four separate forces.
+
+When the ship is in motion, it encounters certain waves in a different frequency, depending on the relative direction of the waves and the speed of the ship. Of course the frequency of beam waves (perpendicular to the ship) is independent from the speed.
+
+\begin{align}
+	\omega_e = \omega-kV \cos (\mu)
+\end{align}
+
+
+
 \section{Dynamic models of ships}
 
 Simple ship dynamic models can be formulated quickly by defining and analyzing the most common propulsion methods. However, these are only vague approximations of the system, and contain few elements of the complex and powerful hydrodynamics.
@@ -91,25 +152,6 @@ According to the guidelines of the seamless simulator, this part of the system h
 \includegraphics[width=0.8\textwidth]{img/simulatorcode}
 \end{minipage}
 \end{tcolorbox}
-
-\subsection{Environmental model}
-
-In order to estimate the behavior of an object in natural environment, the ambient effects must be estimated first. The two major environmental factors are the effects of the sea and wind. They generate periodic loads that stirs and slowly wears down objects they come in contact width. An ocean surface is almost never still, as waves carry the memory of distant and past storms for a long way. However, the ever-changing and chaotic surface of the sea is composed of regular waves, each having its own frequency, direction and amplitude.
-
-\paragraph{Wave model} A simple, but adequately complex irregular wave model\cite[p.~14]{shipsim} can be derived from the basic hydrodynamic principles using superposition of regular waves\cite[p.~19]{hydromechanics}.
-
-\begin{align}
-		\zeta (x, y, t) = T + H_s * \sum_{i=1}^{10} (cos(k .* (x .* sin(\chi) + y * cos(\chi)) + \Omega * \omega{_i} * t + \Phi));
-\end{align}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\textwidth]{fig/wavemodel}
-	\caption{Simulation result of the irregular wave model}
-	\label{fig:wavemodel}
-\end{figure}
-
-\paragraph{Wind model}
 
 \subsection{Maneuvering model}
 

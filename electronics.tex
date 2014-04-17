@@ -19,6 +19,55 @@ Additional electronics include the motor controller board and the servo control,
 
 \subsection{Remote control}
 
+The Man-in-the-loop operation mode has been realized using a commercial two-channel 2.4GHz RC transmitter and receiver. CH1 is responsible for the throttle, or rig control, while CH2 controls the course through the rudder. The output of both channels are standard servo signals.
+
+[wrapfigure about servo signals]
+
+The processing of the servo signals require very high sampling, which is hardly possible with the already presented prototype-boards. A quick but inaccurate solution can be used to process the servo signals, using the ADC
+
+\subsection{Wind sensor}
+
+In order to effectively control a sailing ship, the wind direction must be determined with sufficient precision relative to the body of the ship. Note that sufficient in this context means a generally low precision requirement, but the availability and reliability of that measurement is critical. Several different methods of detection have been investigated:
+
+\paragraph{Incremental encoder} Detection is possible using incremental encoders, and a very high angle precision can be assured. However, in case of a system error or restart, the encoder must be re-calibrated to rely on it again. In addition, some amount of missed signals is inevitable, which would introduce an absolute error to the measurement that can't be neglected.
+
++ Low cost
++ Very high precision
++ Quick response
+
+- On-site hardware processing required
+- Requires frequent recalibration
+- Requires external recalibration hardware
+
+Of course an absolute angle encoder is immune to these problems. An enclosed system is capable of providing precise, reliable and always available data about the wind direction. Alas, the price range of the cheapest of these sensors is way out of the scope of the current project.
+
++ High precision
++ Quick response
++ Always available, reliable
+
+- Very-very expensive
+
+A slightly different approach is to use a multiturn potentiometer and estimate the angle position using an Analog to Digital Converter. Though unfortunately such multiturn potentiometers are unable to perform arbitrary number of rotations in the same direction, therefore their ability is limited.
+
++ Low cost
++ Easy to process
++ sufficient precision
+
+- Can't rotate infinitely
+
+There's a somewhat similar approach that consists of a permanent magnet and a number of analog magnetic field sensors. Either the magnet or the Hall effect sensors are attached to the rotating wind-indicator, while the other part remains fixed to the ship. Processing the signals of 2 (or 4 to compensate for noise) sensors with an ADC and applying adequate trigonometrical processing on the raw data results in an absolute wind direction measurement. Though the required sensor post-processing is heavy on a smaller microcontroller, because of the required inverse trigonometrical functions, this is hardly a factor on a single board computer like the BeagleBone.
+
++ Low cost
++ Sufficient precision
++ Absolute, reliable
+
+- Complex software post-processing required
+- Susceptible to noise
+
+After carefully considering the possibilities, the Magnet-based wind detection was chosen. Optionally a wind speed detector can be assembled using incremental encoders.
+
+[img and schematic of the sensor]
+
 \subsection{Hardware}
 
 \subsection{Assembly}
