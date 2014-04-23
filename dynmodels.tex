@@ -13,7 +13,7 @@ By computing the current water height at every surface points, it's possible to 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{fig/wavemodel}
-	\caption{Simulation result of the irregular wave model \n In motion: \href{youtube.com}{Click here to see it in motion.}}
+	\caption{Simulation result of the irregular wave model}
 	\label{fig:wavemodel}
 \end{figure}
 
@@ -41,9 +41,9 @@ and 3 rotational:
 
 \begin{itemize}
 
-	\item \Phi - \emph{Roll} around the longitudinal \textbf{x}-axis, positive right turning
-	\item \Theta - \emph{Pitch} around lateral \textbf{y}-axis, positive right turning
-	\item \Psi - \emph{Yaw} around the vertival \textbf{z}-axis, positive right turning
+	\item $\Phi$ - \emph{Roll} around the longitudinal \textbf{x}-axis, positive right turning
+	\item $\Theta$ - \emph{Pitch} around lateral \textbf{y}-axis, positive right turning
+	\item $\Psi$ - \emph{Yaw} around the vertival \textbf{z}-axis, positive right turning
 
 \end{itemize}
 
@@ -60,12 +60,12 @@ Let's introduce the dynamic model of a floating rigid body. As stated earlier, i
 For each state variable, a state-transition equation can be defined based on external forces:
 
 \begin{align}
-\dot{Surge}_x_1 &= \frac{F_F}{m}
-\dot{Sway}_x_2  &= \frac{F_S}{m}
-\dot{Heave}_x_3 &= \frac{F_V}{m}
-\dot{Roll}_x_4  &= \frac{T_x}{I_x}
-\dot{Pitch}_x_5 &= \frac{T_y}{I_y}
-\dot{Yaw}_x_6   &= \frac{T_z}{I_z}
+	\dot{Surge}_{x_1} &= \frac{F_F}{m} \\
+	\dot{Sway}_{x_2}  &= \frac{F_S}{m} \\
+	\dot{Heave}_{x_3} &= \frac{F_V}{m} \\
+	\dot{Roll}_{x_4}  &= \frac{T_x}{I_x} \\
+	\dot{Pitch}_{x_5} &= \frac{T_y}{I_y} \\
+	\dot{Yaw}_{x_6}   &= \frac{T_z}{I_z}
 \end{align}
 
 Now the problem is simplified to determining the external forces affecting the body. In order to do this, we apply Archimedes' law\cite{archimedes} on a number of control points. Let's start with 4 points, distributed equally from each other and the edges of a rectangular body.
@@ -94,7 +94,6 @@ Each control point has a position and height that can be determined based on the
 		\sin \Theta & \cos \Theta & 0 \\
 		0 & 0 & 1
 	\end{bmatrix}
-
 \end{align}
 
 It's possible to combine the three rotation matrices into a single formula, but I believe it's more structured and easier to work width when kept separate. Using these formulae the position of a single control point, relative to the ship's centre of mass:
@@ -105,14 +104,12 @@ It's possible to combine the three rotation matrices into a single formula, but 
 		C_y \\
 		C_z
 	\end{bmatrix}
-
 	 = R_x(\Phi) * R_y(\Theta) * R_z(\Psi) *
 	\begin{bmatrix}
 		C_a \\
 		C_b \\
 		C_c
 	\end{bmatrix}
-
 \end{align}
 
 Where a, b and c represents the coordinates in the \textbf{body} frame, while x, y and z represents the coordinates in the \textbf{local} coordinate system. Now that the \textbf{relative} positions of the control points are known, to obtain the \textbf{world} coordinates of the points, they must be offset with the position of the body.
@@ -123,22 +120,18 @@ Where a, b and c represents the coordinates in the \textbf{body} frame, while x,
 		W_y \\
 		W_z
 	\end{bmatrix}
-
 	=
 	\begin{bmatrix}
 		C_x \\
 		C_y \\
 		C_z
 	\end{bmatrix}
-
 	 =
 	\begin{bmatrix}
 		S_x \\
 		S_y \\
 		S_z
-	\end{bmatrix}
- \\
-
+	\end{bmatrix}\\
 	\textbf{W} = \textbf{C} + \textbf{S}
 \end{align}
 

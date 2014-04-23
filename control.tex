@@ -1,7 +1,8 @@
 \section{Control system design}
 
+The control of ships is based on an ancient knowledge, as it is the oldest vehicle known to men.
 
-The path following control problem can be simplified to a course control problem, if the prescribed path is populated by waypoints adequately close to each other. Each waypoint is marked as visited it to ship approaches them to a certain none zero distance. Relying on these above is not always possible, therefore the controller has been extended with position-control.
+The path following control problem can be simplified to a course control problem, if the prescribed path is populated by waypoints sufficiently close to each other. Each waypoint is marked as visited it to ship approaches them to a certain none zero distance. However, some external conditions like strong wind or current might cause serious drift that causes the course-based navigation to become dangerous, especially in narrow passages and rivers. Therefore the controller has been extended with position-control.
 
 \subsection{The combined control problem}
 
@@ -9,7 +10,7 @@ The path following problem can be traced back to an inverted pendulum system, wh
 
 [figure, way to trace back]
 
-The following control system has been developed for the Rudder ship type, in order to parallelize my efforts with the RobonAUT controller development, which is generally the same control problem, if the simplified system dynamics are used.
+The following control system has been developed for the Rudder ship type, in order to parallelize efforts with the RobonAUT controller development, which is generally the same control problem, if the simplified system dynamics are used.
 
 The path following problem can be traced back to a balancing problem, specifically where the ball must be kept in the center of a seesaw: [illusztrációk]
 We know the dynamic behavior of the system:
