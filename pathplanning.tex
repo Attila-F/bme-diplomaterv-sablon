@@ -1,6 +1,71 @@
-\section{Pathplanning} 
+\section{Path planning} 
 
-The first part of the document will lay down the basic concepts and requirements of an oceanography task, focusing on the development of the High Level Controller and a seamless simulator to evaluate the results.
+Marine navigation seems very simple and starightforward at the first glance, one might want to ask what's the reason to put serious effort into a pathplanning algorithm, if ships can sail in straight paths? Although this is a fair point, the maneuvering of ships is rarely restricted to open seas, without any obsticles to avoid, and even then sailing vessels require active planning, as they rarely move paralell to the wind direction, or other disturbances may apply, like ocean currents.
+
+The problems of navigation and pathplanning will be introduced gradually. There are two kinds of boats (bowerboats and sailing), two types of environments (still water and riverine) and two areas of applications (shortest route between points or shortest traversal of an area). In summary there are eight problems to be solved, each getting more complex than the one before. Fortunately, it's enough to solve only some key problems, then combine the findings to a roboust pathplanner.
+
+\subsection{Model of maps and obstacles}
+
+The forms of obstacles in the sea can vary between wide levels of complexity. The operation space can be either be completely open, or closed.
+[img of ship in open vast space and satellite image of Balaton]
+
+They might contain very simple or very complex inner structures.
+[satellite img of svalbard]
+
+Or the free space can be just a strait or as narrow as a river. In the latter case especially, the local traffic of other vehicles must never be ignored, or accidents might occur.
+[img of crowded bosphorus, sailboat in the danube]
+
+/subsection{Global Path planning}
+
+Several algorithms have been developed for global path planning, and this field of study is still researched extensively. The different methods result in very different paths, some of them are optimal, others are not, and some algorithms might even fail to create a path at all. Their performance varies greatly by the different environments they are executed in. A complete overview of all possible motion planning strategies is not in the scope of this document. Some that might be fast, reliable and optimal in certain areas might fail completely in others. In order to find the best navigation solution for each environment, the following algorithms will be analysed and compared to each other in different settings.
+
+\paragraph{Cell decomposition}
+
+Cell decomposition methods are the most used and researched path planning field in outdoor robotics /cite[pathplanning_overview]. The region is broken down into discrete, non-overlapping fields. the union of these fields is the original region. The method has three sub-categories, the Approximate, Adaptive and Exact Cell Decomposition. We will only discuss the Approximate method.
+
+The most widespread of all Cell Decomposition algorithms is the A* search. It lays a grid down over the area to obtain the cell points, representing a graph. Then a best-first search is used to determine the least-cost path between the starting point and the goal. While traversing the graph, A* follows the path of lowest expected total cost. It keeps a sorted priority queue of the cells that need to be examined.
+
+The order of the nodes to be visited are determined based on a cost function based on the past path-cost and the future-cost estimated by heuristics.
+
+[image collage showing how A* works in different environments]
+
+\paragraph{Roadmap}
+
+Roadmap methods use sparse graphs to represent the connectivity between free spaces. The most commonly known algorithms in this group are the visibility graph, or Voronoi-diagram based. Although they have common basics and restrictions, they are significantly different. The former produces an optimal, but unsafe path, as it passes very close to the vertices of the obstacles, the latter generates a rather safe, but suboptimal path, because it aims to keep maximum distance from surrounding objects.
+
+[visibility graph and voronoi diagram comparison]
+
+But the most important is, that we will use neither of them. They require a special polygonal obstacle model, and 
+
+\paragraph{Wavefront}
+
+\paragraph{Comparison of algorithms}
+
+[comparison of path length, execution time, execution efficiency (path length / execution time) in different settings]
+
+\subsection{Local planning and collision avoidance}
+
+\subsection{Navigation of motorboats}
+
+The navigation of a motorboat in an open space is the most basic path planning problem. If there are no moving obsticles in sight, our only task is to keep the boat from running ashore. In order to do this, we can use a geometric pathplanning algorithm, the visibility graph search method to find the shortest euclidean path.
+
+[image of solution]
+
+It's important however, that turning with ships can be a costly maneuver. Therefore the cost distance between each node should be increased with an angle cost as well, as in some cases the ship must slow down to complete the maneuver.
+
+In case of a very complex environment, or if for some reason the visibility graph algorithm can not provide a shortest route, a grid-based ripple algorithm is used instead. In this case it's hard to incorporate the turning penality into the algorithm, so this is an emergency-pathplanning method only.
+
+[image of ripple solution]
+
+\subsection{Navigation of sailboats}
+
+The navigation of sailboats is much more complex, even in a static environment. The navigation problem has many solutions, and it's hard to determine which is optimal.
+
+[]
+
+\subsection{Navigation in moving water}
+
+In addition to the problems that a small and crowded
 
 \subsection{Map reading}
 

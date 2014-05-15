@@ -1,4 +1,4 @@
-\section{Environmental model}
+﻿\section{Environmental model}
 
 In order to estimate the behavior of an object in natural environment, the ambient effects must be estimated first. The two major environmental factors are the effects of the sea and wind. They generate periodic loads that stirs and slowly wears down objects they come in contact width. An ocean surface is almost never still, as waves carry the memory of distant and past storms for a long way. However, the ever-changing and chaotic surface of the sea is composed of regular waves, each having its own frequency, direction and amplitude.
 
@@ -139,7 +139,7 @@ Now we only have to solve the wave model equation in these points only, to deter
 
 \paragraph{Damping} As it should have become trivial by now, the motion of the ship, just like the the sea, is the superposition of a number of harmonic movements. The friction, torrents and other effects dampen this oscillation. In order to approximate these restricting forces, the model must be extended with other elements.
 
-\section{Dynamic models of ships}
+\section{Maneuvering model}
 
 Simple ship dynamic models can be formulated quickly by defining and analyzing the most common propulsion methods. However, these are only vague approximations of the system, and contain few elements of the complex and powerful hydrodynamics.
 
@@ -149,17 +149,11 @@ First the simple ship models are introduced, then an attempt is made to more acc
 
 The differential drive system is very common among simple mobile robotic systems. The movement is based on two separately driven wheels placed on either side of the robot body. It can thus change its direction by varying the relative rate of rotation of its wheels, therefore does not require an additional steering mechanism. A twin-screw ship has a somewhat similar layout. Using the engines positioned in a lateral offset to the centerline of the body, the ship can create a torque and propelling force affecting the body.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\textwidth]{pics/kadtronixframe}
-	\caption{Differential drive robot frame \\ http://www.kadtronix.com/}
-	\label{fig:kadtronixframe}
-\end{figure}
+[figure about diff drive]
 
 This type of ship can be modeled as a 2-DOF mobile robot (frame fixed to the body of the ship).
 
 The dynamical system of the parallel propulsion engines can be formulated easily:
-
 
 Figure here! d is the distance of the wheel from the center
 
@@ -173,35 +167,66 @@ From a control engineer’s point of view the most important aspect of this cont
 The mechanical advantage of this layout is the very high reliability, because the propellers are fixed in a certain angle, therefore they can be build more roboustly, thus decreasing the chance of physical failture. Another advantage is the ability of the ship to turn around it’s central axis, enabling precise maneuvering, however, this is seldom used, because it’s very ineffective with ships.
 Usually older large container-ships employ this type of propulsion. Newer large-scale ship design have kept the multi-screw layout, but also included a rudder directly after the propellers to enhance turning.
 
-\subsection{Rudder ship}
+\subsection{Rudder}
 
-The rudder is a controllable part of the ship, creating a tourque on the body of the ship, using hydrodynamical effects, much like the rudders of airplanes. The generated torque depends on the traveling speed. The ship can not rotate around it’s center axis.
+The rudder is a controllable part of the ship, creating a tourque on the body of the ship, using hydrodynamical effects, much like the rudders of airplanes. The generated torque depends on the traveling speed. A ship like this can usually not rotate around it’s center axis, nor travel backwards efficiently.
 
-The rudder ship can be modeled as a car with Euler(?) steering.
+A representation of a rudder ship can be modeled as a surface car with Ackermann steering. This model is very vague, but is useful for the testing of the higl level course controller and pathplanning.
 
 \begin{align}
 	\dot{x} &= v \\
 	\dot{\Theta} &= \frac{v * tan(\Phi)}{L}
 \end{align}
 
-This control type is usually fitted on faster ships, exploiting the possibility to create high torques on the body at high speeds, resulting in sharp turns.
+The type of the rudder and its placement have a major effect on the controllability of the ship.
+
+[rudder types figures]
+
+All sorts of rudders are required to produce large turning forces, but the rudder size must be balanced between to a good generated torque to draft ratio.
+To determine the approximate size of an optimal rudder for a given ship, a certain rule of thump value of Det Norske Veritas for a minimum projected rudder area can be applied:
+
+\begin{align}
+	A_r approx&= \frac{d * Lpp}{100}(1.0 + 25.0 * (frac{B}{L_{pp}})^2)
+\end{align}
+
+where:
+
+\begin{align}
+	A_r &= projected rudder area \\
+	L_{pp} &= length between perpendiculars \\
+	B &= beam \\
+	d &= draft
+\end{align}
+
+"This formula 4.1 applies only to rudder arrangements in which the rudder is located directly
+behind the propeller. For any other rudder arrangement Det Norske Veritas requires an
+increase in the rudder area by - at least - 30 percent. A twin screw (or more) arrangement
+should be combined with rudders located directly behind the propellers for maximum lowspeed
+maneuverability. A single rudder placed between two propellers may be inadequate,
+because the rudder blade does not swing su¢ciently into the ‡ow of a propeller to generate
+the needed turning moment." (copied, to restructure)
+
+The rudder of the ship acts as an airfoil that produces lift and drag. The [figure] shows a rudder placed in constant flow. The total force can be decomposed. (nem értem, 55. oldal ship hydromechanics)
+
+\begin{align}
+	C_L &= projected rudder area \\
+	L_{pp} &= length between perpendiculars \\
+	B &= beam \\
+	d &= draft
+\end{align}
+
+[figure: rudder forces]
 
 \subsection{Sailing ship}
 
-The sailing ship is usually a rudder controlled ship, but it’s possible to alter the course of a sailing vessel by adjusting the sales or tilting the mast (e.g.: windsurfing).
+The sailing ship is usually controlled by the rudder. It’s possible to alter the course by adjusting the sails or tilting the mast (e.g.: windsurfing). the center of the sails is shifting, and will produce a torque around the center of lateral surface.
 There are many forces affecting the sails and the body of the ship, but it’s way out of the scope of this text to model all of them. However, they can be generalized in two forces, the lift and the drag.
 
-Lift is the force generated on the saild by the wind, affecting paralell with the body of the ship, and drag is the force generated perpendicular to the body of the ship. These forces are greatly and nonlinearly dependent on the strength and direction of the wind, current speed, air pressure, wind shears, local temperature gradiants and a lot of other circumstances.
+Lift is the force generated on the sails by the wind, affecting paralell with the body of the ship, and drag is the force generated perpendicular to the body of the ship. These forces are greatly and nonlinearly dependent on the strength and direction of the wind, current speed, air pressure, wind shears, body drift and keel form, local temperature gradients and other circumstances.
 
-However, they allow to generalize the system into a 3-dof system after making the following assumptions:
+Simulating all these effects is a scientific field of its own. Instead, we are using polar sailing diagrams to approximate the maneuvering performance of the boat. These diagrams, often used as a marketing tool are a widespread visual representation of the capabilities of a specific ship. By allowing the software to process these diagrams, the controller and pathplanner can be effectively customized.
 
-The relative wind is the vectorial subtraction of the velocity from the wind.
-The magnitude of the sail drag is a positive definite function of the relative wind.
-
-The assumptions above result in the following statement:
-The sum force caused by the wind is never parallel to the body of the ship. A certain amount of drift always occurs during sailing (hence exists the 3rd degree of freedom).
-
-The resulting dynamical system can be formulated:
+The resulting software is heavily based on the supplied sailing diagram, but automatic calibration is also possible using wind sensors and GPS.
 
 \begin{align}
 		\dot{x} &= v_x
@@ -210,14 +235,6 @@ The resulting dynamical system can be formulated:
 	\\	\dot{v}_y &= drag - \frac{v_y}{bodydrag_y}
 	\\	\dot{\Theta} &= \frac{v_x * tan(\Phi)}{L}
 \end{align}
-
-\subsection{Ship hydrodynamics}
-
-The hydro- and aerodynamic effects have a great impact on the dynamics of a ship. A perfect prediction is hardly possible, but some considerations can be employed in order to predict the behaviour of a real ship.
-The ever-changing draught of the ship, the effects of the viscous medium it’s located in, nonlinear hydrodynamic effects on the turbines and the body and much else causes the severe complexity of the system. Including the effects of the wind on the body of the ship or the rig, the resulting system is more like a mess than a clear representation.
-However, it’s important to at least partially unravel these mysteries in order to formulate an effective control system. In order to predict the behavior of the ship, the dynamics must be built from the bottom to the top, starting with the environmental model, then the wave model, the ocean/river current model, maneuvering model and finally through what they all interact, the inertia of the ship.
-
-[figure]
 
 \subsection{Building simulation environment}
 
@@ -232,7 +249,5 @@ According to the guidelines of the seamless simulator, this part of the system h
 \includegraphics[width=0.8\textwidth]{img/simulatorcode}
 \end{minipage}
 \end{tcolorbox}
-
-\subsection{Maneuvering model}
 
 \subsection{Uncontrolled system simulation results}
