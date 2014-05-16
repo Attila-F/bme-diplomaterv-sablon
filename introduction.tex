@@ -29,10 +29,12 @@ The goal of this project is to develop an autonomous surface vehicle, which is c
 \end{figure}
 
 \subsection*{Development guidelines}
-To keep a sensible and extendable system, the control software of the ship follows the guidelines of the Model-Based Design approach. The system software can be divided to two different modules, one that is dependent, and one that is independent from the physical characteristics of the vessel. In order to maximize the extendability of the system, the fix (independent) modules must be completely general, but as thorough as possible, in order to keep the complexity of the changeable (dependent) software of the robot minimal.
 \begin{wrapfigure}{r}{0.48\textwidth}
   \begin{center}
     \includegraphics[width=0.5\textwidth]{img/trieste}
   \end{center}
   \caption{Bathyscaphe Trieste, the first manned vessel that reached the bottom of Challenger Deep (Mariana Trench)\cite{trieste}}
+  \label{fig:trieste}
 \end{wrapfigure}
+To keep a sensible and extendable system, the control software of the ship follows the guidelines of the Model-Based Design approach. The system software can be divided to two different modules, one that is dependent, and one that is independent from the physical characteristics of the vessel. In order to maximize the extendability of the system, the fix (independent) modules must be completely general, but as thorough as possible, in order to keep the complexity of the changeable (dependent) software of the robot minimal.
+
